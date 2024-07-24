@@ -1,0 +1,40 @@
+id: wordpress-detect
+
+info:
+  name: WordPress Known Plugin Detect
+  author:
+    - zer0gh0st
+  severity: high
+  tags:
+    - tech
+    - wordpress
+    - plugins
+    - xss
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    matchers:
+      - type: word
+        words:
+          - "plugins/userfeedback-lite"
+          - "plugins/userfeedback-premium"
+          - "plugins/formidable-pro"
+          - "plugins/formidable"
+          - "plugins/liquidpoll"
+          - "plugins/the-events-calendar"
+        part: body
+
+    extractors:
+      - type: regex
+        part: body
+        regex:
+          - "userfeedback-lite"
+          - "elementor"
+          - "userfeedback-premium"
+          - "formidable-pro"
+          - "formidable"
+          - "liquidpoll"
+          - "the-events-calendar"
